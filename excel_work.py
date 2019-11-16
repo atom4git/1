@@ -1,5 +1,6 @@
 import xlrd, xlwt, datetime, re
 from xlutils.copy import copy
+from colors import d
 
 # variables:
 brand = "Bogner"
@@ -10,6 +11,16 @@ n = 0
 k = 0
 list = []
 out_list = []
+
+def find_color(name):
+    for k, v in d.items():
+        for i in v:
+            if "светло-" in name.lower() and i in name.lower():
+                return "светло-" + k
+            if "темно-" in name.lower() and i in name.lower():
+                return "темно-" + k
+            if i in name.lower():
+                return k
 
 
 def open_exel_file(file, sheet=0):
@@ -46,7 +57,6 @@ def make_data_name(data, n, k):
             # i.insert(n, 0)
         # остальный строки()
         else:
-
             size = i[2].split(" ")  # получение листа размеров
             # получение списка размеров с их кол-вом dict
             count = {}  # create empty dict
@@ -65,7 +75,7 @@ def make_data_name(data, n, k):
                 k += 1
                 name = name_tmp + " " + key
                 art = " ".join(str(i[1]).strip().split())  # проверка на наличие лишних пробелов в артикуле
-                out_list.append([k, name, art, key, value, i[4], i[5], look])
+                out_list.append([k, name, art, key, value, i[4], i[5], look, find_color(name), brand])
 
         n += 1
     return out_list
