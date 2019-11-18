@@ -3,7 +3,7 @@ from xlutils.copy import copy
 from colors import d
 
 # variables:
-brand = "Bogner"
+brand = "Dolci Gabana"
 t = datetime.datetime.today().strftime("%d%m%Y")
 list_date = brand + t
 
@@ -57,17 +57,17 @@ def make_data_name(data, n, k):
             # i.insert(n, 0)
         # остальный строки()
         else:
-            size = i[2].split(" ")  # получение листа размеров
+            size = str(i[2]).split(" ")  # получение листа размеров
             # получение списка размеров с их кол-вом dict
             count = {}  # create empty dict
             for character in size:
                 if character != "" and character != " ":  # проверка наличия пуcтых значений
                     if str(character).isalpha() and str(
                             character).islower():  # проверка на нижний регистр букв в размерах типа "XL"
-                        character = str(character).capitalize()
+                        character = str(character).upper()
                     count.setdefault(character, 0)
                     count[character] += 1
-            name_tmp = str(i[0]).strip().capitalize() + " " + i[1]
+            name_tmp = str(i[0]).strip().capitalize() + " " + str(i[1])
             name_tmp = " ".join(name_tmp.split())  # проверка на наличие лишних пробелов в имени
             look_tmp = name_tmp.split() # получение вида товара
             look = str(look_tmp[0]).lower() # получение вида товара
@@ -75,7 +75,7 @@ def make_data_name(data, n, k):
                 k += 1
                 name = name_tmp + " " + key
                 art = " ".join(str(i[1]).strip().split())  # проверка на наличие лишних пробелов в артикуле
-                out_list.append([k, name, art, key, value, i[4], i[5], look, find_color(name), brand])
+                out_list.append([k, name, str(art), str(key), str(value), str(i[4]).lower(), i[5], look, find_color(name), brand])
 
         n += 1
     return out_list
@@ -108,4 +108,4 @@ try:
 except PermissionError:
     print("Закройте ваш файл EXCEL!")
 
-
+#TODO all liters Upper in art
