@@ -75,7 +75,7 @@ def make_data_name(data, n, k):
                 k += 1
                 name = name_tmp + " " + key
                 art = " ".join(str(i[1]).strip().split())  # проверка на наличие лишних пробелов в артикуле
-                out_list.append([k, name, str(art), str(key), str(value), str(i[4]).lower(), i[5], look, find_color(name), brand])
+                out_list.append([k, name, str(art), (key), str(value), str(i[4]).lower(), i[5], look, find_color(name), i[6]])
 
         n += 1
     return out_list
