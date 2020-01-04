@@ -3,7 +3,7 @@ from xlutils.copy import copy
 from colors import d
 
 # variables:
-brand = "Dolci Gabana"
+brand = "Jacob Cohen"
 t = datetime.datetime.today().strftime("%d%m%Y")
 list_date = brand + t
 
@@ -44,20 +44,16 @@ def make_data_name(data, n, k):
     :param n:
     :return: out_list
     """
-    # for w in data:
-    #     for l in w:
-    #         print(l)
 
     for i in data:
         # генерируем первую строку(head)
         if n < 1:
             # k += 1
-            i.insert(0, " N/N")
+            # i.insert(0, " N/N")
             out_list.append(i)  # добавляем 1 строку в лист
-            # i.insert(n, 0)
         # остальный строки()
         else:
-            size = str(i[2]).split(" ")  # получение листа размеров
+            size = str(i[6]).split(" ")  # получение листа размеров
             # получение списка размеров с их кол-вом dict
             count = {}  # create empty dict
             for character in size:
@@ -67,15 +63,15 @@ def make_data_name(data, n, k):
                         character = str(character).upper()
                     count.setdefault(character, 0)
                     count[character] += 1
-            name_tmp = str(i[0]).strip().capitalize() + " " + str(i[1])
+            name_tmp = str(i[2]).strip().capitalize() + " " + str(i[3] + " "  + " " + str(i[5]))# + str(i[4])
             name_tmp = " ".join(name_tmp.split())  # проверка на наличие лишних пробелов в имени
             look_tmp = name_tmp.split() # получение вида товара
             look = str(look_tmp[0]).lower() # получение вида товара
             for key, value in count.items():
                 k += 1
                 name = name_tmp + " " + key
-                art = " ".join(str(i[1]).strip().split())  # проверка на наличие лишних пробелов в артикуле
-                out_list.append([k, name, str(art), (key), str(value), str(i[4]).lower(), i[5], look, find_color(name), i[6]])
+                art = " ".join(str(i[5]).strip().split())  # проверка на наличие лишних пробелов в артикуле
+                out_list.append([k, i[1], name, i[3], i[4], str(art), (key), i[7], i[8], value, "=I2*J2", i[11], find_color(name), (key), " ", look, "",  brand])
 
         n += 1
     return out_list
