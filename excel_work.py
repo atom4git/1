@@ -104,4 +104,4 @@ try:
 except PermissionError:
     print("Закройте ваш файл EXCEL!")
 
-#TODO all liters Upper in art
+
