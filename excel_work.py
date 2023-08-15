@@ -1,9 +1,13 @@
+#!/usr/bin/env python3
 import xlrd, xlwt, datetime, re
 from xlutils.copy import copy
-from colors import d
+import json
 
+
+colors_json = open('colors.json')
+colors_dict = json.load(colors_json)
 # variables:
-brand = "Jacob Cohen"
+brand = "Glossi"
 t = datetime.datetime.today().strftime("%d%m%Y")
 list_date = brand + t
 
@@ -13,7 +17,7 @@ list = []
 out_list = []
 
 def find_color(name):
-    for k, v in d.items():
+    for k, v in colors_dict.items():
         for i in v:
             if "светло-" in name.lower() and i in name.lower():
                 return "светло-" + k
